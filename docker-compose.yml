@@ -1,0 +1,54 @@
+services:
+  leveldb:
+    image: alpine:3.18
+    container_name: mini-zanzibar-leveldb
+    ports:
+      - "8080:8080"
+    volumes:
+      - leveldb_data:/data
+    environment:
+      - LEVELDB_DATA_DIR=/data
+    command: >
+      sh -c "apk add --no-cache leveldb leveldb-dev python3 py3-pip &&
+             echo 'LevelDB tools installed' &&
+             python3 -m http.server 8080 &
+             echo 'Basic HTTP server running on port 8080 for LevelDB access' &&
+             tail -f /dev/null"
+    restart: unless-stopped
+    networks:
+      - mini-zanzibar-network
+
+  consuldb:
+    image: consul:1.15.4
+    container_name: mini-zanzibar-consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    volumes:
+      - consul_data:/consul/data
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    command: >
+      consul agent
+      -server
+      -bootstrap-expect=1
+      -datacenter=dc1
+      -data-dir=/consul/data
+      -log-level=INFO
+      -node=consul-server
+      -bind=0.0.0.0
+      -client=0.0.0.0
+      -ui
+    restart: unless-stopped
+    networks:
+      - mini-zanzibar-network
+
+volumes:
+  leveldb_data:
+    driver: local
+  consul_data:
+    driver: local
+
+networks:
+  mini-zanzibar-network:
+    driver: bridge
