@@ -45,25 +45,11 @@ def root():
         'message': 'Mini Zanzibar API',
         'version': '0.1.0',
         'endpoints': [
-            '/hello',
-            '/health'
+            '/login',
+            '/acl'
         ]
     })
 
-
-@api_bp.route('/hello', methods=['GET'])
-def hello_world():
-    """Simple hello world endpoint."""
-    return jsonify({'message': 'Hello, Bojan!'})
-
-
-@api_bp.route('/health', methods=['GET'])
-def health_check():
-    """Health check endpoint."""
-    return jsonify({
-        'status': 'healthy',
-        'service': 'mini-zanzibar'
-    })
 
 
 
