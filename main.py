@@ -11,7 +11,7 @@ def create_app():
     limiter = Limiter(
         get_remote_address,
         app=app,
-        default_limits=["100 per minute"]
+        default_limits=["10 per minute"]
     )
     app.register_blueprint(api_bp, url_prefix='/api')
     return app
