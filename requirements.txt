@@ -1,0 +1,7 @@
+flask==2.3.3
+plyvel
+Flask-Limiter
+PyJWT
+bcrypt
+python-consul
+requests

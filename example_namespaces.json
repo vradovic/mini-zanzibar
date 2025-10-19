@@ -1,0 +1,92 @@
+[
+  {
+    "namespace": "doc",
+    "relations": {
+      "owner": {},
+      "editor": {
+        "union": [
+          {
+            "this": {}
+          },
+          {
+            "computed_userset": {
+              "relation": "owner"
+            }
+          }
+        ]
+      },
+      "viewer": {
+        "union": [
+          {
+            "this": {}
+          },
+          {
+            "computed_userset": {
+              "relation": "editor"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "namespace": "folder",
+    "relations": {
+      "owner": {},
+      "editor": {
+        "union": [
+          {
+            "this": {}
+          },
+          {
+            "computed_userset": {
+              "relation": "owner"
+            }
+          }
+        ]
+      },
+      "viewer": {
+        "union": [
+          {
+            "this": {}
+          },
+          {
+            "computed_userset": {
+              "relation": "editor"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "namespace": "organization",
+    "relations": {
+      "admin": {},
+      "member": {
+        "union": [
+          {
+            "this": {}
+          },
+          {
+            "computed_userset": {
+              "relation": "admin"
+            }
+          }
+        ]
+      },
+      "guest": {
+        "union": [
+          {
+            "this": {}
+          },
+          {
+            "computed_userset": {
+              "relation": "member"
+            }
+          }
+        ]
+      }
+    }
+  }
+]
