@@ -7,8 +7,6 @@ def hash_password(plain):
 
 USERS = {
     "alice": {"password": hash_password("password123"), "role": "admin"},
-    "bob":   {"password": hash_password("securepass"), "role": "editor"},
-    "carol": {"password": hash_password("qwerty"), "role": "viewer"},
-    "admin": {"password": hash_password("admin123"), "role": "admin"},
-    "user":  {"password": hash_password("user123"), "role": "user"}
+    "bob":   {"password": hash_password("securepass"), "role": "user"},
+    "carol": {"password": hash_password("qwerty"), "role": "user"}
 }
