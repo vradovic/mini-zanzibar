@@ -235,7 +235,8 @@ def create_namespace():
         }), 201
 
     except ValueError as e:
-        return jsonify({'error': f'Validation error: {str(e)}'}), 400
+        logger.warning(f"Validation error while creating namespace: {str(e)}")
+        return jsonify({'error': 'Validation error'}), 400
     except Exception as e:
         logger.error(f"Error creating namespace: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
