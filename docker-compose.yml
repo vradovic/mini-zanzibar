@@ -18,6 +18,19 @@ services:
     networks:
       - mini-zanzibar-network
 
+  backend:
+    build: .
+    container_name: mini-zanzibar-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - leveldb
+      - consuldb
+    networks:
+      - mini-zanzibar-network
+    volumes:
+      - .:/app
+
   consuldb:
     image: consul:1.15.4
     container_name: mini-zanzibar-consul
